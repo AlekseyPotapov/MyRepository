@@ -1,9 +1,8 @@
-# Build and Release Folders
-bin-debug/
-bin-release/
-
-# Project property files
+.settings
+bin-debug
+html-template
+bin-release
+.DS_Store
 .actionScriptProperties
 .flexProperties
-.settings/
 .project
