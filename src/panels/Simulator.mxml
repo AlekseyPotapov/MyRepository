@@ -109,13 +109,17 @@
 		#plusButton {
 			skinClass: ClassReference("ui.iconButton.IconButtonSkin");
 			icon2Display: Embed('assets/icons/zoom/plus.png');
-			icon2DisplayDown: Embed('assets/icons/footer/footerZoom-down.png');
+			icon2DisplayDown: Embed('assets/icons/zoom/PlusClick.png');
 		}
 		#minusButton {
 			skinClass: ClassReference("ui.iconButton.IconButtonSkin");
-			icon2Display: Embed('assets/icons/zoom/minus.png');
-			icon2DisplayDown: Embed('assets/icons/footer/footerZoom-down.png');
+			icon2Display: Embed('assets/icons/zoom/Mines.png');
+			icon2DisplayDown: Embed('assets/icons/zoom/MinesClick.png');
 		}	
+		#grid {
+			fontWeight: bold;
+			textAlign: center;
+		}
 	</fx:Style>
 	<s:VGroup width="100%" gap="0" top="0" height="100%">
 		
@@ -130,20 +134,25 @@
 			</s:VGroup>
 		</s:HGroup>
 		<!--********** MAIN CONTENT **********-->
+		
 		<s:HGroup width="100%" height="100%" gap="0">
 			<!--GRID-->
-			<mx:DataGrid id="grid" dataProvider="{arrcol}" editable="true" rowCount="10" itemRenderer="ui.grid.GridRenderer">
-				<mx:columns>
-					<mx:DataGridColumn textAlign="center" headerText="A" dataField="A" itemRenderer="ui.grid.GridItemRenderer"/>
-					<mx:DataGridColumn textAlign="center" headerText="B" dataField="B"/>
-					<mx:DataGridColumn textAlign="center" headerText="C" dataField="C"/>
-					<mx:DataGridColumn textAlign="center" headerText="D" dataField="D"/>
-					<mx:DataGridColumn textAlign="center" headerText="E" dataField="E"/>
-				</mx:columns>
-			</mx:DataGrid>	
+			
+			<s:DataGrid styleName="grid" id="grid" caretColor="0xffffff" dataProvider="{arrcol}" editable="true"
+						requestedRowCount="10" skinClass="ui.grid.GridSkin" textAlign="right">
+				<s:columns>
+					<s:ArrayList>
+						<s:GridColumn width="60" headerText="A" dataField="A" />
+						<s:GridColumn width="60" headerText="B" dataField="B" />
+						<s:GridColumn width="60" headerText="C" dataField="C" />
+						<s:GridColumn width="60" headerText="D" dataField="D" />
+						<s:GridColumn width="60" headerText="E" dataField="E" />
+					</s:ArrayList>
+				</s:columns>
+			</s:DataGrid>
+			
 		</s:HGroup>
 		
-		<!--********** FOOTER **********-->
 		<s:HGroup id="footerGroup" width="100%" height="28" gap="0" left="15">
 			<!-- zoomSlider -->
 			<s:Group left="15" height="100%"><s:Label left="5" text="{Math.round(zoomSlider.value) + '%'}" fontSize="11" verticalCenter="1"/></s:Group>

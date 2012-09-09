@@ -17,7 +17,7 @@
 		<s:State name="disabledAndSelected" stateGroups="selectedUpStates, disabledStates, selectedStates" />
 	</s:states>
 	
-	<s:BitmapImage 
+	<s:BitmapImage
 		source.up="@Embed('assets/icons/alignButtons/centerButton.png')"
 		source.overAndSelected="@Embed('assets/icons/alignButtons/centerButtonSelectOver.png')"
 		source.downAndSelected="@Embed('assets/icons/alignButtons/centerButtonPress.png')"
