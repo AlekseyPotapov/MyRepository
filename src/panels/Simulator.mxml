@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" xmlns:searchField="ui.searchField.*" 
+		 xmlns:comboBox="ui.comboBox.*" xmlns:ribbonSectionHeader="ui.ribbonSectionHeader.*" 
+		 xmlns:roundedBitmapImage="ui.roundedBitmapImage.*" xmlns:manageableButton="ui.manageableButton.*" 
+		 xmlns:checkBox="ui.checkBox.*">
+	
+	<fx:Declarations>
+		<s:ArrayCollection id="comboBoxArr">
+			<fx:Object> 
+				<fx:Pic></fx:Pic> 
+				<fx:Text>Общий</fx:Text> 
+				<fx:SubText>Формат не указан</fx:SubText>
+			</fx:Object> 
+			<fx:Object> 
+				<fx:Pic></fx:Pic> 
+				<fx:Text>Числовой</fx:Text> 
+				<fx:SubText></fx:SubText>
+			</fx:Object> 
+			<fx:Object> 
+				<fx:Pic></fx:Pic> 
+				<fx:Text>Денежный</fx:Text> 
+				<fx:SubText></fx:SubText>
+			</fx:Object> 
+			<fx:Object> 
+				<fx:Pic></fx:Pic> 
+				<fx:Text>Финансовый</fx:Text> 
+				<fx:SubText></fx:SubText> 
+			</fx:Object> 
+			<fx:Object> 
+				<fx:Pic></fx:Pic> 
+				<fx:Text>Краткая дата</fx:Text> 
+				<fx:SubText></fx:SubText> 
+			</fx:Object> 
+			<fx:Object> 
+				<fx:Pic></fx:Pic> 
+				<fx:Text>Длинный формат даты</fx:Text> 
+				<fx:SubText></fx:SubText>
+			</fx:Object> 
+			<fx:Object> 
+				<fx:Pic></fx:Pic> 
+				<fx:Text>Процентный</fx:Text> 
+				<fx:SubText></fx:SubText>
+			</fx:Object> 
+			<fx:Object> 
+				<fx:Pic></fx:Pic> 
+				<fx:Text>Дробный</fx:Text> 
+				<fx:SubText></fx:SubText>
+			</fx:Object> 
+			<fx:Object> 
+				<fx:Pic></fx:Pic> 
+				<fx:Text>Экспоненциальный</fx:Text> 
+				<fx:SubText></fx:SubText>
+			</fx:Object> 
+			<fx:Object> 
+				<fx:Pic></fx:Pic> 
+				<fx:Text>Текстовый</fx:Text> 
+				<fx:SubText></fx:SubText>
+			</fx:Object> 
+		</s:ArrayCollection>
+	</fx:Declarations>
+		
+	
+	<fx:Script>
+		<![CDATA[
+			import flashx.textLayout.formats.WhiteSpaceCollapse;
+			
+			import mx.collections.ArrayCollection;
+			import mx.controls.Text;
+			import mx.events.FlexEvent;
+			
+			import spark.events.IndexChangeEvent;
+			
+			[Bindable]
+			private var alignButtonBarValue:String = "";
+			[Bindable]
+			private var canvasScale:Number = 1;
+			private var isMouseDown:Boolean = false;
+			[Bindable]
+			public var arrcol:ArrayCollection=new ArrayCollection()
+			public var arr:Array=new Array({A:"", B:"", C:"", D:"", E:""});
+			
+			protected function init(event:FlexEvent):void{
+				arrcol.source=arr;
+			}
+			protected function plusZoomSlider_ClickHandler(event:MouseEvent):void
+			{
+				zoomSlider.value++;
+			}
+			protected function minusZoomSlider_ClickHandler(event:MouseEvent):void
+			{
+				zoomSlider.value--;
+			}
+			protected function plusZoomSlider_downHandler(event:MouseEvent):void
+			{
+				zoomSlider.value++;
+			}
+			protected function minusZoomSlider_downHandler(event:MouseEvent):void
+			{
+				zoomSlider.value--;
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Style>
+				/* FOOTER */
+		#plusButton {
+			skinClass: ClassReference("ui.iconButton.IconButtonSkin");
+			icon2Display: Embed('assets/icons/zoom/plus.png');
+			icon2DisplayDown: Embed('assets/icons/footer/footerZoom-down.png');
+		}
+		#minusButton {
+			skinClass: ClassReference("ui.iconButton.IconButtonSkin");
+			icon2Display: Embed('assets/icons/zoom/minus.png');
+			icon2DisplayDown: Embed('assets/icons/footer/footerZoom-down.png');
+		}	
+	</fx:Style>
+	<s:VGroup width="100%" gap="0" top="0" height="100%">
+		
+		
+		<s:HGroup gap="7">
+			<!--********** Align Buttons **********-->
+			<s:VGroup gap="3" width="240" paddingTop="3">
+				<s:ButtonBar id="AlignButtonBar" requireSelection="true" skinClass="ui.alignButtonBar.AlignButtonBarSkin" dataProvider="{new ArrayCollection(['Normal View', 'Slide Sorter View', 'Slide Show'])}" 
+							 verticalCenter="0" horizontalCenter="0"/>
+				<s:Group height="100%"><comboBox:ComboBox id="formatComboBox" dataProvider="{comboBoxArr}"
+														  selectedIndex="1" width="56" verticalCenter="0"/></s:Group>
+			</s:VGroup>
+		</s:HGroup>
+		<!--********** MAIN CONTENT **********-->
+		<s:HGroup width="100%" height="100%" gap="0">
+			<!--GRID-->
+			<mx:DataGrid id="grid" dataProvider="{arrcol}" editable="true" rowCount="10" itemRenderer="ui.grid.GridRenderer">
+				<mx:columns>
+					<mx:DataGridColumn textAlign="center" headerText="A" dataField="A" itemRenderer="ui.grid.GridItemRenderer"/>
+					<mx:DataGridColumn textAlign="center" headerText="B" dataField="B"/>
+					<mx:DataGridColumn textAlign="center" headerText="C" dataField="C"/>
+					<mx:DataGridColumn textAlign="center" headerText="D" dataField="D"/>
+					<mx:DataGridColumn textAlign="center" headerText="E" dataField="E"/>
+				</mx:columns>
+			</mx:DataGrid>	
+		</s:HGroup>
+		
+		<!--********** FOOTER **********-->
+		<s:HGroup id="footerGroup" width="100%" height="28" gap="0" left="15">
+			<!-- zoomSlider -->
+			<s:Group left="15" height="100%"><s:Label left="5" text="{Math.round(zoomSlider.value) + '%'}" fontSize="11" verticalCenter="1"/></s:Group>
+			<s:HGroup width="207" height="100%" focusColor="#ff0000" gap="-2"
+					  paddingLeft="50">
+				<s:Group height="100%"><s:Button id="minusButton" verticalCenter="0" click="minusZoomSlider_ClickHandler(event)" mouseDown="minusZoomSlider_downHandler(event)"/></s:Group>
+				<s:Group height="100%"><s:HSlider id="zoomSlider" width="100"
+												  liveDragging="true" maximum="400"
+												  minimum="10"
+												  skinClass="ui.nsSlider.NSSliderSkin"
+												  value="100" verticalCenter="-3"/></s:Group>
+				<s:Group height="100%"><s:Button id="plusButton" verticalCenter="0" click="plusZoomSlider_ClickHandler(event)" mouseDown="plusZoomSlider_downHandler(event)"/></s:Group>
+			</s:HGroup>
+		</s:HGroup>
+	</s:VGroup>	
+</s:Group>
