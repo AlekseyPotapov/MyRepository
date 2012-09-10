@@ -2,23 +2,36 @@
 <s:ItemRenderer xmlns:fx="http://ns.adobe.com/mxml/2009" 
 				xmlns:s="library://ns.adobe.com/flex/spark" 
 				xmlns:mx="library://ns.adobe.com/flex/mx" 
-				height="17"
 				rollOver="{currentState = 'hovered'}"
 				rollOut="{currentState = 'normal'}"
+				width="300"
 				autoDrawBackground="false">
 	<s:states>
 		<s:State name="normal"/>
 		<s:State name="hovered"/>
+		<s:State name="up" />
+		<s:State name="over" />
+		<s:State name="down" />
+		<s:State name="disabled" />
 	</s:states>
+
+	<!-- fill -->
+	<s:Group width="100%" height="100%">
+		
+		<!--<s:Rect left="0" right="0" top="0" bottom="0" radiusX="2" radiusY="2">
+			<s:fill>
+				<s:LinearGradient rotation="90">
+					<s:GradientEntry color.over="0xefefef" color.down="0xa1a1a1" alpha.up="0"/>
+					<s:GradientEntry color.over="0xd1d1d2" color.down="0xaeaeae" alpha.up="0"/>
+				</s:LinearGradient>
+			</s:fill>
+		</s:Rect>
+		-->
+	</s:Group>
 	
-	<s:Rect includeIn="hovered" left="0" right="0" top="0" bottom="0">
-		<s:fill>
-			<s:SolidColor color="0x4676f8"/>
-		</s:fill>
-	</s:Rect>
-	
-	<s:Label text="{data}" fontSize="11" verticalCenter="0"
-			 left="21" right="20"
-			 color="0x000000" color.hovered="0xffffff"/>
-	
+	<s:HGroup>
+		<s:BitmapImage source="{data.pic}" />
+		<s:Label fontSize="11" fontWeight="bold" text="{data.text}" textAlign="center"
+				 verticalAlign="middle"/>
+	</s:HGroup>
 </s:ItemRenderer>

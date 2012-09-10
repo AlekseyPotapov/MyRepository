@@ -8,57 +8,19 @@
 	
 	<fx:Declarations>
 		<s:ArrayCollection id="comboBoxArr">
-			<fx:Object> 
-				<fx:Pic></fx:Pic> 
-				<fx:Text>Общий</fx:Text> 
-				<fx:SubText>Формат не указан</fx:SubText>
-			</fx:Object> 
-			<fx:Object> 
-				<fx:Pic></fx:Pic> 
-				<fx:Text>Числовой</fx:Text> 
-				<fx:SubText></fx:SubText>
-			</fx:Object> 
-			<fx:Object> 
-				<fx:Pic></fx:Pic> 
-				<fx:Text>Денежный</fx:Text> 
-				<fx:SubText></fx:SubText>
-			</fx:Object> 
-			<fx:Object> 
-				<fx:Pic></fx:Pic> 
-				<fx:Text>Финансовый</fx:Text> 
-				<fx:SubText></fx:SubText> 
-			</fx:Object> 
-			<fx:Object> 
-				<fx:Pic></fx:Pic> 
-				<fx:Text>Краткая дата</fx:Text> 
-				<fx:SubText></fx:SubText> 
-			</fx:Object> 
-			<fx:Object> 
-				<fx:Pic></fx:Pic> 
-				<fx:Text>Длинный формат даты</fx:Text> 
-				<fx:SubText></fx:SubText>
-			</fx:Object> 
-			<fx:Object> 
-				<fx:Pic></fx:Pic> 
-				<fx:Text>Процентный</fx:Text> 
-				<fx:SubText></fx:SubText>
-			</fx:Object> 
-			<fx:Object> 
-				<fx:Pic></fx:Pic> 
-				<fx:Text>Дробный</fx:Text> 
-				<fx:SubText></fx:SubText>
-			</fx:Object> 
-			<fx:Object> 
-				<fx:Pic></fx:Pic> 
-				<fx:Text>Экспоненциальный</fx:Text> 
-				<fx:SubText></fx:SubText>
-			</fx:Object> 
-			<fx:Object> 
-				<fx:Pic></fx:Pic> 
-				<fx:Text>Текстовый</fx:Text> 
-				<fx:SubText></fx:SubText>
-			</fx:Object> 
+			<fx:Object pic="assets/icons/combobox/General.png" text="Общий" />
+			<fx:Object pic="assets/icons/combobox/Numbers.png" text="Числовой" />
+			<fx:Object pic="assets/icons/combobox/Cash.png" text="Денежный" />
+			<fx:Object pic="assets/icons/combobox/Financial.png" text="Финансовый" />
+			<fx:Object pic="assets/icons/combobox/ShortDateFormat.png" text="Краткий формат даты" />
+			<fx:Object pic="assets/icons/combobox/LongDateFormat.png" text="Длинный формат даты" />
+			<fx:Object pic="assets/icons/combobox/Time.png" text="Время" />
+			<fx:Object pic="assets/icons/combobox/Percent.png" text="Процентный" />
+			<fx:Object pic="assets/icons/combobox/half.png" text="Дробный" />
+			<fx:Object pic="assets/icons/combobox/Exponential.png" text="Экспоненциальный" />
+			<fx:Object pic="assets/icons/combobox/Alphabet.png" text="Текстовый" />
 		</s:ArrayCollection>
+		<!--<s:ArrayCollection id="comboBoxArr">-->
 	</fx:Declarations>
 		
 	
@@ -129,8 +91,19 @@
 			<s:VGroup gap="3" width="240" paddingTop="3">
 				<s:ButtonBar id="AlignButtonBar" requireSelection="true" skinClass="ui.alignButtonBar.AlignButtonBarSkin" dataProvider="{new ArrayCollection(['Normal View', 'Slide Sorter View', 'Slide Show'])}" 
 							 verticalCenter="0" horizontalCenter="0"/>
-				<s:Group height="100%"><comboBox:ComboBox id="formatComboBox" dataProvider="{comboBoxArr}"
-														  selectedIndex="1" width="56" verticalCenter="0"/></s:Group>
+				
+				
+				<!-- combobox -->
+
+				<s:ComboBox id="comboBox" width="70"
+							prompt="Please select a State..."
+							dataProvider="{comboBoxArr}"
+							paddingTop="6"
+							labelField="name" 
+							itemRenderer="ui.comboBox.ComboBoxItemRenderer" 
+							skinClass="ui.comboBox.ComboBoxSkin"/>
+				
+				
 			</s:VGroup>
 		</s:HGroup>
 		<!--********** MAIN CONTENT **********-->
